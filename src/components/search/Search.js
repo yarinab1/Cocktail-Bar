@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Item from './Item';
 import axios from 'axios';
 
@@ -8,6 +8,18 @@ const INITIAL_STATE = {
 const Search = () => {
   const [values, setValues] = useState(INITIAL_STATE);
   const [responseData, setResponseData] = useState({});
+
+  useEffect(() => {
+     const timerSearch = setTimeout(() => {
+        if(values.term)
+            {
+                runSearch(values.term);
+            }
+      },500);
+      return () => {
+          clearTimeout(timerSearch);
+      };
+  },[values.term]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,6 +56,8 @@ const Search = () => {
           className='search-input'
           placeholder='Search..'
           value={values.term}
+          autoComplete='off'
+          autoFocus
         />
       </form>
       {responseData.drinks &&
