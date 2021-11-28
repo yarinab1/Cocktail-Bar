@@ -28,7 +28,7 @@ const Search = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(values.term):
+     console.log(values.term):
     runSearch(values.term);
   };
 
